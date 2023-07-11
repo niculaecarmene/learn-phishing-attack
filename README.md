@@ -4,8 +4,8 @@ In this project I am playing around with phishing attack vulnerabilities
 
 # Steps to create project - run the commands below
 
-mkdir learn-marketplace-unfungeble
-cd learn-marketplace-unfungeble
+mkdir learn-phishing-attack
+cd learn-phishing-attack
 npm init --yes
 npm install --save-dev hardhat
 
@@ -22,25 +22,19 @@ npx hardhat compile
 
 # Contract explanations
 
-    MyMarketPlaceNFT Contract
-        ✔ User IERC721 to make calls to any ERC721 contracts to be able to transfer NFTs
-        ✔ listItem - Add an NFT to the marketplace
-        ✔ purchase - Purchase NFT that is listed in the marketplace 
+    SimpleSmartWallet Contract - smart wallet simulater
+        ✔ transfer - use to transfer money if you are the originater 
     
-    MyERC721 Contract - dummy ERC721 contract - to be used for testing purpose only
-        ✔ Extends ERC721
-        ✔ ERC721 to mint tokens etc
+    AttackSmartWallet Contract
+        ✔ call SimpleSmartWallet in the constructor so you can overwrite the originater 
+        ✔ receive - steals the money of of the SimpleSmartWallet Contract
 
 # Tests - test/tests.js
 
     Test approve/transfer tokens
-        ✔ Create CUTE and BOOBLES NFT tokens
-        ✔ Store balance for each user
-        ✔ Transfer CUTE NFTs to the marketplace
-        ✔ Check if the transfered NFTs belong now to the marketplace
-        ✔ Transfer BOOBLES NFTs to the marketplace
-        ✔ Check if the transfered NFTs belong now to the marketplace
-        ✔ Try to do different purchases with different conditions just to test the require in each function
+        ✔ deposit some ETH in the SimpleSmartWallet Contract
+        ✔ trick the owner of the SimpleSmartWallet Contract to send some ETH to the AttackSmartWallet
+        ✔ like this the origineter is overwritten and the AttackSmartWallet can take all the ETH 
 
 # Test - run the command below
 npx hardhat test test/tests.js
